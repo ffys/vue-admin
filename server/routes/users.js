@@ -30,6 +30,11 @@ router.post('/signup',(req,res) => {
   }
 });
 
+router.get('/signup',(req,res) => {
+    res.json({message: 'hello index!'});
+});
+
+
 //检查用户名与密码并生成一个accesstoken如果验证通过
 router.post('/user/accesstoken',(req,res) => {
   User.findOne({

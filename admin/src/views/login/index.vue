@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container">
+  <div class="login-container" :style="loginbg" >
     <el-form class="card-box login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
       <h3 class="title">系统登录</h3>
 
@@ -69,7 +69,8 @@ export default {
       },
       pwdType: 'password',
       loading: false,
-      showDialog: false
+      showDialog: false,
+      loginbg: 'background-image: url("https://momentumdash.com/backgrounds/01.jpg");'
     }
   },
   methods: {
@@ -79,6 +80,12 @@ export default {
       } else {
         this.pwdType = 'password'
       }
+    },
+    randbg() {
+      let randnum = Math.ceil(Math.random() * 13)
+      randnum = randnum >= 10 ? randnum : '0' + randnum
+      this.loginbg = 'background-image: url("https://momentumdash.com/backgrounds/' + randnum + '.jpg");'
+      console.log(randnum)
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
@@ -121,6 +128,9 @@ export default {
   },
   destroyed() {
         // window.removeEventListener('hashchange', this.afterQRScan)
+  },
+  mounted() {
+    this.randbg()
   }
 }
 </script>
@@ -129,7 +139,7 @@ export default {
   @import "src/styles/mixin.scss";
   $bg:#2d3a4b;
   $dark_gray:#889aa4;
-  $light_gray:#eee;
+  $light_gray:#111;
 
   .login-container {
     @include relative;
@@ -138,6 +148,9 @@ export default {
     input:-webkit-autofill {
       -webkit-box-shadow: 0 0 0px 1000px #293444 inset !important;
       -webkit-text-fill-color: #fff !important;
+    }
+    .login-form{
+      background-color: #fff;
     }
     input {
       background: transparent;
